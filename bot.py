@@ -9,7 +9,7 @@ number = None
 max_attempts = 3
 attempts = 0
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=['ارقام', 'start'])
 def start(message):
     global game_active, attempts
     game_active = False
