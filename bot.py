@@ -1,32 +1,56 @@
-import env
-import logging
-from pyrogram import Client, idle
-from pyromod import listen  # type: ignore
-from pyrogram.errors import ApiIdInvalid, ApiIdPublishedFlood, AccessTokenInvalid
+import random
+import telebot
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-logging.basicConfig(
-    level=logging.WARNING, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)  # type: ignore
+bot = telebot.TeleBot('6387632922:AAFHZLAxufgGRByVOxpb2FEhJNhhwcKakj8')
 
-app = Client(
-    ":memory:",
-    api_id=env.API_ID,
-    api_hash=env.API_HASH,
-    bot_token=env.BOT_TOKEN,
-    plugins=dict(root="StringSessionBot"),
-)
+game_active = False
+number = None
+max_attempts = 3
+attempts = 0
 
+@bot.message_handler(commands=['start'])
+def start(message):
+    global game_active, attempts
+    game_active = False
+    attempts = 0
 
-if __name__ == "__main__":
-    print("Starting the bot")
+    markup = InlineKeyboardMarkup()
+    markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
+    bot.send_message(message.chat.id, 'اهلاً حياك الله! اضغط على الزر لبدء اللعبة.', reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda call: call.data == "start_game")
+def start_game(call):
+    global game_active, number, attempts
+    if not game_active:
+        number = random.randint(1, 10)
+        bot.send_message(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
+        game_active = True
+        attempts = 0
+    else:
+        bot.send_message(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
+
+@bot.message_handler(func=lambda message: game_active)
+def handle_guess(message):
+    global game_active, number, attempts
     try:
-        app.start()
-    except (ApiIdInvalid, ApiIdPublishedFlood):
-        raise Exception("Your API_ID/API_HASH is not valid.")
-    except AccessTokenInvalid:
-        raise Exception("Your BOT_TOKEN is not valid.")
-    uname = app.get_me().username
-    print(f"@{uname} is now running!")
-    idle()
-    app.stop()
-    print("Bot stopped. Alvida!")
+        guess = int(message.text)
+        attempts += 1
+
+        if guess == number:
+            bot.send_message(message.chat.id, "مُبارك فزتها بفخر 🥳")
+            video_url = "https://t.me/VIPABH/2"
+            bot.send_video(message.chat.id, video_url)
+            game_active = False
+        elif attempts >= max_attempts:
+            bot.send_message(message.chat.id, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
+            video_url = "https://t.me/VIPABH/23"
+            bot.send_video(message.chat.id, video_url)
+            game_active = False
+        else:
+            bot.send_message(message.chat.id, "جرب مرة لخ، الرقم غلط💔")
+
+    except ValueError:
+        bot.send_message(message.chat.id, "يرجى إدخال رقم صحيح")
+
+bot.polling()
