@@ -46,7 +46,7 @@ def handle_guess(message):
             bot.send_video(message.chat.id, video_url)
             game_active = False
         elif attempts >= max_attempts:
-            bot.reply_to(message.chat.id, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
+            bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
             video_url = "https://t.me/VIPABH/23"
             bot.send_video(message.chat.id, video_url)
             game_active = False
