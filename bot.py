@@ -41,7 +41,7 @@ def handle_guess(message):
         attempts += 1
 
         if guess == number:
-            bot.reply_to(message.chat.id, "مُبارك فزتها بفخر 🥳")
+            bot.reply_to(message, "مُبارك فزتها بفخر 🥳")
             video_url = "https://t.me/VIPABH/2"
             bot.send_video(message.chat.id, video_url)
             game_active = False
