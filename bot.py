@@ -10,7 +10,7 @@ max_attempts = 3
 attempts = 0
 active_player_id = None  # متغير لتحديد اللاعب النشط
 
-@bot.message_handler(commands=['ارقام', 'start'])
+@bot.message_handler(commands=['ارقام', 'start', numbers])
 def start(message):
     global game_active, attempts, active_player_id
     game_active = False
