@@ -27,11 +27,11 @@ def start_game(call):
     if not game_active:
         number = random.randint(1, 10)
         active_player_id = call.from_user.id  # تخزين ID اللاعب الذي بدأ اللعبة
-        bot.send_message(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
+        bot.reply_to(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
         game_active = True
         attempts = 0
     else:
-        bot.send_message(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
+        bot.reply_to(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
 
 @bot.message_handler(func=lambda message: game_active and message.from_user.id == active_player_id)
 def handle_guess(message):
@@ -41,12 +41,12 @@ def handle_guess(message):
         attempts += 1
 
         if guess == number:
-            bot.send_message(message.chat.id, "مُبارك فزتها بفخر 🥳")
+            bot.reply_to(message.chat.id, "مُبارك فزتها بفخر 🥳")
             video_url = "https://t.me/VIPABH/2"
             bot.send_video(message.chat.id, video_url)
             game_active = False
         elif attempts >= max_attempts:
-            bot.send_message(message.chat.id, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
+            bot.reply_to(message.chat.id, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
             video_url = "https://t.me/VIPABH/23"
             bot.send_video(message.chat.id, video_url)
             game_active = False
