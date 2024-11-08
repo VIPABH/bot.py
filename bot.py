@@ -55,4 +55,4 @@ def handle_guess(message):
     except ValueError:
         bot.send_message(message.chat.id, "يرجى إدخال رقم صحيح")
 
-bot.polling()
+bot.infinity_polling() 
