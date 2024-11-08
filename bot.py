@@ -51,7 +51,7 @@ def handle_guess(message):
             bot.send_video(message.chat.id, video_url)
             game_active = False
         else:
-            bot.reply_to(message.chat.id, "جرب مرة لخ، الرقم غلط💔")
+            bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
     except ValueError:
         bot.send_message(message.chat.id, "يرجى إدخال رقم صحيح")
 
