@@ -19,7 +19,7 @@ def start(message):
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
-bot.send_message(message.chat.id, 'اهلاً حياك الله! اضغط على الزر لبدء اللعبة.', reply_markup=markup)
+    bot.send_message(message.chat.id, 'اهلاً حياك الله! اضغط على الزر لبدء اللعبة.', reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
