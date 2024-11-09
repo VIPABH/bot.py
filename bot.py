@@ -53,6 +53,6 @@ def handle_guess(message):
         else:
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
     except ValueError:
-        bot.reply_to(message.chat.id, "يرجى إدخال رقم صحيح")
+        bot.reply_to(message, "يرجى إدخال رقم صحيح")
 
 bot.infinity_polling() 
