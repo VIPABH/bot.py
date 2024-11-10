@@ -55,3 +55,4 @@ def handle_guess(message):
     except ValueError:
         bot.reply_to(message, "يرجى إدخال رقم صحيح")
 
+bot.polling()
