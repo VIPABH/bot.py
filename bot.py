@@ -2,16 +2,14 @@ import random
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-bot = telebot.TeleBot('6387632922:AAFHZLAxufgGRByVOxpb2FEhJNhhwcKakj8')  # تأكد من إدخال مفتاح API صحيح
+bot = telebot.TeleBot('6387632922:AAFHZLAxufgGRByVOxpb2FEhJNhhwcKakj8')
 
-# المتغيرات العامة
 game_active = False
 number = None
 max_attempts = 3
 attempts = 0
-active_player_id = None  # متغير لتحديد اللاعب النشط
+active_player_id = None  
 
-# دالة بدء اللعبة وإعادة تعيين المتغيرات
 @bot.message_handler(commands=['ارقام', 'start', 'num'])
 def start(message):
     global game_active, attempts, active_player_id
@@ -23,7 +21,6 @@ def start(message):
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
     bot.send_message(message.chat.id, 'اهلاً حياك الله! اضغط على الزر لبدء اللعبة.', reply_markup=markup)
 
-# دالة التحكم عند الضغط على زر "ابدأ اللعبة"
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
     global game_active, number, attempts, active_player_id
@@ -36,7 +33,6 @@ def start_game(call):
     else:
         bot.send_message(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
 
-# دالة التعامل مع محاولات التخمين
 @bot.message_handler(func=lambda message: game_active and message.from_user.id == active_player_id)
 def handle_guess(message):
     global game_active, number, attempts
@@ -51,16 +47,13 @@ def handle_guess(message):
             game_active = False
         elif attempts >= max_attempts:
             bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
-            voice_path = "path_to_voice.ogg"  # مسار ملف الصوت بصيغة OGG
-            with open(voice_path, "rb") as voice_file:
-                bot.send_voice(message.chat.id, voice=voice_file, reply_to_message_id=message.message_id)
+            video_url = "https://t.me/VIPABH/23"
+            bot.send_message(message.chat.id, video_url)
             game_active = False
         else:
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
     except ValueError:
         bot.reply_to(message, "يرجى إدخال رقم صحيح")
-
-# تشغيل البوت مع إعادة المحاولة في حال حدوث خطأ
 while True:
     try:
         bot.polling(none_stop=True)  # إضافة none_stop=True لتجنب توقف البوت
