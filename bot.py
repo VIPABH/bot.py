@@ -51,8 +51,9 @@ def handle_guess(message):
             game_active = False
         elif attempts >= max_attempts:
             bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
-            video_url = "https://t.me/VIPABH/23"
-            bot.send_voice(message.chat.id, video_url)
+            voice_path = "path_to_voice.ogg"  # مسار ملف الصوت بصيغة OGG
+            with open(voice_path, "rb") as voice_file:
+                bot.send_voice(message.chat.id, voice=voice_file, reply_to_message_id=message.message_id)
             game_active = False
         else:
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
