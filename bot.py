@@ -52,7 +52,7 @@ def handle_guess(message):
         elif attempts >= max_attempts:
             bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
             video_url = "https://t.me/VIPABH/23"
-            bot.send_message(message.chat.id, video_url)
+            bot.send_voice(message.chat.id, video_url)
             game_active = False
         else:
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
