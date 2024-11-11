@@ -25,7 +25,7 @@ def start(message):
 def start_game(call):
     global game_active, number, attempts, active_player_id
     if not game_active:
-        number = random.randint(1, 10)
+        number = random.randint(1, 2)
         active_player_id = call.from_user.id  # تخزين ID اللاعب الذي بدأ اللعبة
         bot.send_message(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
         game_active = True
@@ -48,7 +48,7 @@ def handle_guess(message):
         elif attempts >= max_attempts:
             bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
             فويس_الخساره = "https://t.me/VIPABH/23"
-            bot.send_message(message.chat.id, فويس_الخساره)
+            bot.send_voice(message.chat.id, فويس_الخساره)
             game_active = False
         else:
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
