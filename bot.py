@@ -19,7 +19,7 @@ def start(message):
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
-    bot.send_message(message.chat.id, 'اهلاً حياك الله! اضغط على الزر لبدء اللعبة.', reply_markup=markup)
+    bot.reply_to(message.chat.id, 'اهلاً حياك الله! اضغط على الزر لبدء اللعبة.', reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
@@ -27,11 +27,11 @@ def start_game(call):
     if not game_active:
         number = random.randint(1, 2)
         active_player_id = call.from_user.id  # تخزين ID اللاعب الذي بدأ اللعبة
-        bot.send_message(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
+        bot.reply_to(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
         game_active = True
         attempts = 0
     else:
-        bot.send_message(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
+        bot.reply_to(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
 
 @bot.message_handler(func=lambda message: game_active and message.from_user.id == active_player_id)
 def handle_guess(message):
