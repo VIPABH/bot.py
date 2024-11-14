@@ -27,7 +27,7 @@ def start_game(call):
     if not game_active:
         number = random.randint(1, 2)
         active_player_id = call.from_user.id  # تخزين ID اللاعب الذي بدأ اللعبة
-        bot.reply_to(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
+        bot.send_message(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
         game_active = True
         attempts = 0
     else:
