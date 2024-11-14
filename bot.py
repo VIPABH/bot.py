@@ -22,7 +22,7 @@ def start(message):
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
 
-    bot.send_message(message.chat.id, f'اهلاً [{message.from_user.first_name}](https://t.me/@{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', parse_mode='Markdown', reply_markup=markup)
+    bot.send_message(message.chat.id, f'اهلاً [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', parse_mode='Markdown', reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
@@ -30,6 +30,7 @@ def start_game(call):
     if not game_active:
         number = random.randint(1, 10)
         active_player_id = call.from_user.id
+        bot.send_video(call.message.chat.id, "https://t.me/VIPABH/1168")  # إرسال الفيديو في بداية اللعبة
         bot.send_message(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
         game_active = True
         attempts = 0
