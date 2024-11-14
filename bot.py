@@ -42,13 +42,13 @@ def handle_guess(message):
 
         if guess == number:
             bot.reply_to(message, "مُبارك فزتها بفخر 🥳")
-            فويس_الفوز = "https://t.me/VIPABH/2"
-            bot.send_voice(message.chat.id, فويس_الفوز)
+            won = "https://t.me/VIPABH/2"
+            bot.send_voice(message.chat.id, won)
             game_active = False
         elif attempts >= max_attempts:
             bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
-            فويس_الخساره = "https://t.me/VIPABH/23"
-            bot.send_voice(message.chat.id, فويس_الخساره)
+            lose = "https://t.me/VIPABH/23"
+            bot.send_voice(message.chat.id, lose)
             game_active = False
         else:
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
