@@ -23,8 +23,13 @@ def start(message):
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
 
     # إرسال الفيديو مع الزر في نفس الرسالة
-    bot.send_video(message.chat.id, "https://t.me/VIPABH/1168")  # هنا يتم إرسال الفيديو مباشرة
-    bot.send_message(message.chat.id, f'اهلاً [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', parse_mode='Markdown', reply_markup=markup)
+    bot.send_video(message.chat.id, "https://t.me/VIPABH/1168")  # إرسال الفيديو مباشرة
+    bot.send_message(
+        message.chat.id,
+        f'اهلاً [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة. ',
+        parse_mode='Markdown', 
+        reply_markup=markup
+    )
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
