@@ -9,13 +9,14 @@ number = None
 max_attempts = 3
 attempts = 0
 active_player_id = None  
-username = message.from_user.username if message.from_user.username else "لا يوجد اسم مستخدم"
+
 @bot.message_handler(commands=['ارقام', 'start', 'num'])
 def start(message):
     global game_active, attempts, active_player_id
     game_active = False
     attempts = 0
     active_player_id = None
+username = message.from_user.username if message.from_user.username else "لا يوجد اسم مستخدم"
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
