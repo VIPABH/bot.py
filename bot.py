@@ -9,7 +9,7 @@ number = None
 max_attempts = 3
 attempts = 0
 active_player_id = None  
-
+username = message.from_user.username if message.from_user.username else "لا يوجد اسم مستخدم"
 @bot.message_handler(commands=['ارقام', 'start', 'num'])
 def start(message):
     global game_active, attempts, active_player_id
@@ -19,7 +19,7 @@ def start(message):
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
-    bot.send_message(message.chat.id, 'اهلاً حياك الله! اضغط على الزر لبدء اللعبة.', reply_markup=markup)
+    bot.send_message(message.chat.id, 'اهلاً [{message.from_user.first_name}](https://t.me/@{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
