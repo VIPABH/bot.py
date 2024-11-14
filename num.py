@@ -52,7 +52,7 @@ def handle_guess(message):
     try:
         guess = int(message.text)
         if guess < 1 or guess > 10:
-            bot.reply_to(message, "مو كلنه رقم اختر من 1 إلى 10 فقط.")
+            bot.reply_to(message, "مو كلنه رقم اختر من 1 إلى 10 فقط 😡.")
             return
 
         attempts += 1
