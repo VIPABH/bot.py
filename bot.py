@@ -16,18 +16,20 @@ def start(message):
     game_active = False
     attempts = 0
     active_player_id = None
-username = message.from_user.username if message.from_user.username else "لا يوجد اسم مستخدم"
+
+    username = message.from_user.username if message.from_user.username else "لا يوجد اسم مستخدم"
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
-    bot.send_message(message.chat.id, 'اهلاً [{message.from_user.first_name}](https://t.me/@{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', reply_markup=markup)
+
+    bot.send_message(message.chat.id, f'اهلاً [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', parse_mode='Markdown', reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
     global game_active, number, attempts, active_player_id
     if not game_active:
-        number = random.randint(1, 2)
-        active_player_id = call.from_user.id  # تخزين ID اللاعب الذي بدأ اللعبة
+        number = random.randint(1, 10)
+        active_player_id = call.from_user.id
         bot.send_message(call.message.chat.id, 'اختر أي رقم من 1 إلى 10 🌚 ')
         game_active = True
         attempts = 0
@@ -55,8 +57,9 @@ def handle_guess(message):
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
     except ValueError:
         bot.reply_to(message, "يرجى إدخال رقم صحيح")
+
 while True:
     try:
-        bot.polling(none_stop=True)  # إضافة none_stop=True لتجنب توقف البوت
+        bot.polling(none_stop=True)
     except Exception as e:
         print(f"حدث خطأ: {e}")
