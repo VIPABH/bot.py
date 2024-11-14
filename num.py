@@ -46,12 +46,15 @@ def start_game(call):
         attempts = 0
     else:
         bot.reply_to(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
-
 @bot.message_handler(func=lambda message: game_active and message.from_user.id == active_player_id)
 def handle_guess(message):
     global game_active, number, attempts
     try:
         guess = int(message.text)
+        if guess < 1 or guess > 10:
+            bot.reply_to(message, "الرجاء اختيار رقم من 1 إلى 10 فقط.")
+            return
+
         attempts += 1
 
         if guess == number:
