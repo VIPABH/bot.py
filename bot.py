@@ -22,16 +22,9 @@ def start(message):
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
 
-    # إرسال الصورة مع النص
-    bot.send_photo(message.chat.id, "https://t.me/LIHHIHL/107", caption=f"[{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown")
-
-    # إرسال الرسالة مع الزر
-    bot.send_message(
-        message.chat.id,
-        f'اهلاً [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.',
-        parse_mode='Markdown', 
-        reply_markup=markup
-    )
+    # إرسال صورة مع الزر في نفس الرسالة
+    bot.send_photo(message.chat.id, "https://your-image-link.com/image.jpg", caption=f"[{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown")
+    bot.send_message(message.chat.id, f'اهلاً [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', parse_mode='Markdown', reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
@@ -66,8 +59,6 @@ def handle_guess(message):
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
     except ValueError:
         bot.reply_to(message, "يرجى إدخال رقم صحيح")
-
-# تأكد من أن الكود هنا لا يحتوي على أي نقص أو خطأ في التنسيق أو القوس المفقود
 
 while True:
     try:
