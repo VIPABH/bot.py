@@ -21,7 +21,7 @@ def start(message):
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
-    bot.send_video(message.chat.id, "https://t.me/VIPABH/1168", caption=f"[{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown", reply_markup=markup)
+    bot.send_video(message.chat.id, "https://t.me/VIPABH/1168", caption=f"[{message.from_user.first_name}](https://t.me/{username})اهلا  حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
     global game_active, number, attempts, active_player_id
