@@ -13,8 +13,14 @@ active_player_id = None
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    bot.reply_to(message, "اهلا حياك الله , ارسل `كتويت` لبدء اسئلة الكت تويت او `/ارقام` , /num لبدء لعبة الارقام /n enjoy ", parse_mode='Markdown')
-
+    bot.reply_to(
+        message,
+        "أهلاً حياك الله! \n"
+        "• أرسل `كتويت` لبدء أسئلة الكت تويت. \n"
+        "• أرسل `/ارقام` أو `/num` لبدء لعبة الأرقام.\n\n"
+        " استمتع! 🎉",
+        parse_mode='Markdown'
+    )
 
 
 @bot.message_handler(commands=['ارقام', 'num'])
