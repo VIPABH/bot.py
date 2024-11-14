@@ -10,7 +10,14 @@ max_attempts = 3
 attempts = 0
 active_player_id = None  
 
-@bot.message_handler(commands=['ارقام', 'start', 'num'])
+
+@bot.message_handler(commands=['start'])
+def handle_start(message):
+    bot.reply_to(message, " `اهلا حياك الله ,ارسل كلمه `كتويت` لبدء لعبة الكت تويت او ارسل `/ارقام , /num لبدء لعبة الارقام", parse_mode='Markdown')
+
+
+
+@bot.message_handler(commands=['ارقام', 'num'])
 def start(message):
     global game_active, attempts, active_player_id
     game_active = False
