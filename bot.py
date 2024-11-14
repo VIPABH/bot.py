@@ -24,9 +24,7 @@ def start(message):
 
     # إرسال صورة مع الزر في نفس الرسالة
     bot.send_video(message.chat.id, "https://t.me/VIPABH/1168", caption=f"[{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown")
-    bot.send_message(message.chat.id, f'اهلاً [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة. ', parse_mode='Markdown', reply_markup=markup)
-
-@bot.callback_query_handler(func=lambda call: call.data == "start_game")
+    @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
     global game_active, number, attempts, active_player_id
     if not game_active:
