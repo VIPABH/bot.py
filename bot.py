@@ -59,4 +59,18 @@ def handle_guess(message):
             game_active = False
         elif attempts >= max_attempts:
             bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
-       
+            lose = "https://t.me/VIPABH/23"
+            bot.send_voice(message.chat.id, lose)
+            game_active = False
+        else:
+            bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
+    except ValueError:
+        bot.reply_to(message, "يرجى إدخال رقم صحيح")
+
+# تأكد من أن الكود هنا لا يحتوي على أي نقص أو خطأ في التنسيق أو القوس المفقود
+
+while True:
+    try:
+        bot.polling(none_stop=True)
+    except Exception as e:
+        print(f"حدث خطأ: {e}")
