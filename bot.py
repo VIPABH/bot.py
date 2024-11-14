@@ -13,14 +13,8 @@ active_player_id = None
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    bot.reply_to(
-        message,
-        "أهلاً حياك الله! \n"
-        "• أرسل `كتويت` لبدء أسئلة الكت تويت. \n"
-        "• أرسل `/ارقام` أو `/num` لبدء لعبة الأرقام.\n\n"
-        " استمتع! 🎉",
-        parse_mode='Markdown'
-    )
+    bot.reply_to(message, " `اهلا حياك الله ,ارسل كلمه `كتويت` لبدء لعبة الكت تويت او ارسل `/ارقام , /num لبدء لعبة الارقام", parse_mode='Markdown')
+
 
 
 @bot.message_handler(commands=['ارقام', 'num'])
@@ -34,7 +28,7 @@ def start(message):
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
-    bot.send_video(message.chat.id, "https://t.me/VIPABH/1204", caption=f" اهلا [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown", reply_markup=markup)
+    bot.send_video(message.chat.id, "https://t.me/VIPABH/1204", caption=f" اهلا [{message.from_user.first_name}](https://t.me/@{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
     global game_active, number, attempts, active_player_id
@@ -71,6 +65,12 @@ def handle_guess(message):
 
 
 
+
+
+
+@bot.message_handler(commands=['start'])
+def handle_start(message):
+    bot.reply_to(message, " اهلا حياك الله ,ارسل كلمه `كتويت` لبدء اللعبة", parse_mode='Markdown')
 
 
 questions = [
@@ -311,4 +311,8 @@ def send_random_question(message):
     random_question = random.choice(questions)
     bot.reply_to(message, random_question)
 
-
+while True:
+    try:
+        bot.polling(none_stop=True)
+    except Exception as e:
+        print(f"حدث خطأ: {e}")
