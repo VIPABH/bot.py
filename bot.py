@@ -23,7 +23,7 @@ def start(message):
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
 
     # إرسال الصورة مع النص
-    bot.send_photo(message.chat.id, "https://t.me/VIPABH/1168", caption=f"[{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown")
+    bot.send_photo(message.chat.id, "https://t.me/LIHHIHL/107", caption=f"[{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown")
 
     # إرسال الرسالة مع الزر
     bot.send_message(
