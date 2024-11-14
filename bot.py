@@ -13,7 +13,7 @@ active_player_id = None
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    bot.reply_to(message, " `اهلا حياك الله ,ارسل كلمه `كتويت` لبدء لعبة الكت تويت او ارسل `/ارقام , /num لبدء لعبة الارقام", parse_mode='Markdown')
+    bot.reply_to(message, "اهلا حياك الله , ارسل `كتويت` لبدء اسئلة الكت تويت او `/ارقام` , /num لبدء لعبة الارقام /n enjoy ", parse_mode='Markdown')
 
 
 
@@ -28,7 +28,7 @@ def start(message):
 
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
-    bot.send_video(message.chat.id, "https://t.me/VIPABH/1204", caption=f" اهلا [{message.from_user.first_name}](https://t.me/@{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown", reply_markup=markup)
+    bot.send_video(message.chat.id, "https://t.me/VIPABH/1204", caption=f" اهلا [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
     global game_active, number, attempts, active_player_id
