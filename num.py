@@ -41,7 +41,7 @@ def start_game(call):
         number = random.randint(1, 10)
         active_player_id = call.from_user.id
         username = call.from_user.username if call.from_user.username else "لا يوجد اسم مستخدم"
-        bot.send_message(call.message.chat.id, f'عزيزي  [{call.from_user.first_name}](https://t.me/{username}) اختر أي رقم من 1 إلى 10 🌚',  parse_mode="Markdown")
+        bot.send_message(call.message.chat.id, f'عزيزي  [{call.from_user.first_name}](https://t.me/@{username}) اختر أي رقم من 1 إلى 10 🌚',  parse_mode="Markdown")
         game_active = True
         attempts = 0
     else:
@@ -60,9 +60,9 @@ def handle_guess(message):
 
         if guess == number:
             bot.reply_to(message, "مُبارك فزتها بفخر 🥳")
-            bot.reply_to(message,  "🥳")
             won = "https://t.me/VIPABH/2"
             bot.send_voice(message.chat.id, won)
+            bot.reply_to(message,  "🥳")
             game_active = False
         elif attempts >= max_attempts:
             bot.reply_to(message, f"للأسف، لقد نفدت محاولاتك. الرقم الصحيح هو {number}.🌚")
