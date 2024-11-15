@@ -39,10 +39,10 @@ def start(message):
 def start_game(call):
     global game_active, number, attempts, active_player_id
     if not game_active:
-        number = random.randint(1, 10)
+         number = random.randint(1, 10)
         active_player_id = call.from_user.id
-        username = message.from_user.username if message.from_user.username else "لا يوجد اسم مستخدم"
-        bot.send_message(call.message.chat.id, 'عزيزي  [{message.from_user.first_name}](https://t.me/{username}) اختر أي رقم من 1 إلى 10 🌚',  parse_mode="Markdown")
+        username = call.from_user.username if call.from_user.username else "لا يوجد اسم مستخدم"
+        bot.send_message(call.message.chat.id, f'عزيزي  [{call.from_user.first_name}](https://t.me/{username}) اختر أي رقم من 1 إلى 10 🌚',  parse_mode="Markdown")
         game_active = True
         attempts = 0
     else:
@@ -76,12 +76,6 @@ def handle_guess(message):
 
 
 
-
-
-
-@bot.message_handler(commands=['start'])
-def handle_start(message):
-    bot.reply_to(message, " اهلا حياك الله ,ارسل كلمه `كتويت` لبدء اللعبة", parse_mode='Markdown')
 
 
 questions = [
