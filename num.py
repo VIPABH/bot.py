@@ -10,7 +10,6 @@ max_attempts = 3
 attempts = 0
 active_player_id = None  
 
-
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     bot.reply_to(
@@ -21,7 +20,6 @@ def handle_start(message):
         " استمتع! 🎉",
         parse_mode='Markdown'
     )
-
 
 @bot.message_handler(commands=['ارقام', 'num'])
 def start(message):
@@ -35,11 +33,12 @@ def start(message):
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton("ابدأ اللعبة", callback_data="start_game"))
     bot.send_video(message.chat.id, "https://t.me/VIPABH/1204", caption=f" اهلا [{message.from_user.first_name}](https://t.me/{username}) حياك الله! اضغط على الزر لبدء اللعبة.", parse_mode="Markdown", reply_markup=markup)
+
 @bot.callback_query_handler(func=lambda call: call.data == "start_game")
 def start_game(call):
     global game_active, number, attempts, active_player_id
     if not game_active:
-         number = random.randint(1, 10)
+        number = random.randint(1, 10)
         active_player_id = call.from_user.id
         username = call.from_user.username if call.from_user.username else "لا يوجد اسم مستخدم"
         bot.send_message(call.message.chat.id, f'عزيزي  [{call.from_user.first_name}](https://t.me/{username}) اختر أي رقم من 1 إلى 10 🌚',  parse_mode="Markdown")
@@ -47,6 +46,7 @@ def start_game(call):
         attempts = 0
     else:
         bot.reply_to(call.message.chat.id, 'اللعبة قيد التشغيل، يرجى انتهاء الجولة الحالية أولاً.')
+
 @bot.message_handler(func=lambda message: game_active and message.from_user.id == active_player_id)
 def handle_guess(message):
     global game_active, number, attempts
@@ -73,9 +73,6 @@ def handle_guess(message):
             bot.reply_to(message, "جرب مرة لخ، الرقم غلط💔")
     except ValueError:
         bot.reply_to(message, "يرجى إدخال رقم صحيح")
-
-
-
 
 
 questions = [
